@@ -20,7 +20,7 @@ export const messages = [
     createdAt: new Date(Date.now() - 14 * 24 * 60 * 1000 * 1000),
   },
 ];
- 
+
 export const chats = [
   {
     id: '1',
