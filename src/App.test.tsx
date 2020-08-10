@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import App from './App';
+import ChatsNavbar from './components/ChatListScreen/ChatsNavbar'
 
 test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
+  const { getByText } = render(<ChatsNavbar />);
+  const linkElement = getByText(/WhatsApp Clone/i);
   expect(linkElement).toBeInTheDocument();
 });
