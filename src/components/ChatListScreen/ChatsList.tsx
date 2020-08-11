@@ -1,8 +1,9 @@
-import React, { useCallback, useState, useMemo } from 'react';
-import { useHistory } from 'react-router-dom';
-import { List, ListItem } from '@material-ui/core';
+import React from 'react';
 import moment from 'moment';
+import { List, ListItem } from '@material-ui/core';
 import styled from 'styled-components';
+import { useCallback, useState, useMemo } from 'react';
+import { History } from 'history';
 
 const Container = styled.div`
   height: calc(100% - 56px);
@@ -70,9 +71,12 @@ const getChatsQuery = `
     }
   }
 `;
-const ChatsList: React.FC = () => {
-  const history = useHistory();
 
+interface ChatsListProps {
+  history: History;
+}
+
+const ChatsList: React.FC<ChatsListProps> = ({ history }) => {
   const [chats, setChats] = useState<any[]>([]);
 
   useMemo(async () => {
@@ -89,9 +93,12 @@ const ChatsList: React.FC = () => {
     setChats(chats);
   }, []);
 
-  const navToChat = useCallback((chat) => {
-    history.push(`chats/${chat.id}`);
-  }, [history]);
+  const navToChat = useCallback(
+    (chat) => {
+      history.push(`chats/${chat.id}`);
+    },
+    [history]
+  );
 
   return (
     <Container>
@@ -126,4 +133,5 @@ const ChatsList: React.FC = () => {
     </Container>
   );
 };
+
 export default ChatsList;
