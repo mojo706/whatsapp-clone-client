@@ -12,7 +12,7 @@ import { createBrowserHistory } from 'history';
 describe('ChatsList', () => {
   beforeEach(() => {
     const history = createBrowserHistory();
-    history.push(`/`)
+    history.push(`/`);
     fetchMock.mockResponseOnce(
       JSON.stringify({
         data: {
@@ -31,7 +31,7 @@ describe('ChatsList', () => {
         },
       })
     );
-  })
+  });
 
   afterEach(() => {
     cleanup();
@@ -48,9 +48,7 @@ describe('ChatsList', () => {
 
   it('renders fetched chats data', async () => {
     const history = createBrowserHistory();
-    const { container, getByTestId } = render(
-      <ChatsList history={history} />
-    );
+    const { container, getByTestId } = render(<ChatsList history={history} />);
 
     await waitFor(() => screen.getByTestId('name'));
 
@@ -67,7 +65,7 @@ describe('ChatsList', () => {
     const history = createBrowserHistory();
     {
       const { container, getByTestId } = render(
-      <ChatsList history={history} />
+        <ChatsList history={history} />
       );
 
       await waitFor(() => screen.getByTestId('chat'));

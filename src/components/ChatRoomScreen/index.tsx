@@ -1,5 +1,17 @@
 import React from 'react';
 import { useMemo, useState } from 'react';
+import styled from 'styled-components';
+import ChatNavbar from './ChatNavbar';
+import MessageInput from './MessageInput';
+import MessageList from './MessagesList';
+import { History } from 'history';
+
+const Container = styled.div`
+  background: url(/assets/chat-background.jpg);
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
+`;
 
 const getChatQuery = `
   query GetChat($chatId: ID!) {
@@ -18,6 +30,7 @@ const getChatQuery = `
 
 interface ChatRoomScreenParams {
   chatId: string;
+  history: History;
 }
 
 export interface ChatQueryMessage {
@@ -35,7 +48,10 @@ export interface ChatQueryResult {
 
 type OptionalChatQueryResult = ChatQueryResult | null;
 
-const ChatRoomScreen: React.FC<ChatRoomScreenParams> = ({ chatId }) => {
+const ChatRoomScreen: React.FC<ChatRoomScreenParams> = ({
+  history,
+  chatId,
+}) => {
   const [chat, setChat] = useState<OptionalChatQueryResult>(null);
 
   useMemo(async () => {
@@ -59,16 +75,10 @@ const ChatRoomScreen: React.FC<ChatRoomScreenParams> = ({ chatId }) => {
 
   return (
     <div>
-      <img src={chat.picture} alt="Profile" />
-      <div>{chat.name}</div>
-      <ul>
-        {chat.messages.map((message) => (
-          <li key={message.id}>
-            <div>{message.content}</div>
-            <div>{message.createdAt}</div>
-          </li>
-        ))}
-      </ul>
+      <Container>
+        <ChatNavbar chat={chat} history={history} />
+        {chat.messages && <MessageList messages={chat.messages} />}
+      </Container>
     </div>
   );
 };
