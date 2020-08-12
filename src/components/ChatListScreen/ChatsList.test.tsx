@@ -65,16 +65,18 @@ describe('ChatsList', () => {
 
   it('should navigate to the target chat room on chat item click', async () => {
     const history = createBrowserHistory();
-    const { container, getByTestId } = render(
+    {
+      const { container, getByTestId } = render(
       <ChatsList history={history} />
-    );
+      );
 
-    await waitFor(() => screen.getByTestId('chat'));
+      await waitFor(() => screen.getByTestId('chat'));
 
-    fireEvent.click(getByTestId('chat'));
+      fireEvent.click(getByTestId('chat'));
 
-    await waitFor(() =>
-      expect(history.location.pathname).toEqual('/chats/1')
-    );
+      await waitFor(() =>
+        expect(history.location.pathname).toEqual('/chats/1')
+      );
+    }
   });
 });
