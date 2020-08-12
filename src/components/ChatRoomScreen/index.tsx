@@ -20,13 +20,13 @@ interface ChatRoomScreenParams {
   chatId: string;
 }
 
-interface ChatQueryMessage {
+export interface ChatQueryMessage {
   id: string;
   content: string;
   createdAt: Date;
 }
 
-interface ChatQueryResult {
+export interface ChatQueryResult {
   id: string;
   name: string;
   picture: string;
